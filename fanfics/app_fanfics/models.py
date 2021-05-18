@@ -19,9 +19,10 @@ class Fanfic(models.Model):
     title = models.CharField(max_length=500)
     annotation = models.TextField()
     publication_date = models.DateTimeField('Published:')
-    author = models.ForeignKey(Author, on_delete=models.SET_NULL)
-    beta = models.ForeignKey(Author, on_delete=models.SET_NULL)
-    fandom = models.ForeignKey(Fandom, on_delete=models.SET_DEFAULT)
+    author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True)
+    # FIXME
+    # beta = models.ForeignKey(Author, on_delete=models.SET_NULL)
+    fandom = models.ForeignKey(Fandom, on_delete=models.SET_DEFAULT, default=1)
 
     def __str__(self):
         return f"{self.title} by {self.author}"
