@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['127.0.0.1', '91.228.147.78', 'vpa.nn.kiev.ua', 'fanfics.nn.kie
 # Application definition
 
 INSTALLED_APPS = [
+    'app_fanfics.apps.FanfictionConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -105,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 
