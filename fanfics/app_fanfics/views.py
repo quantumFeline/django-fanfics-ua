@@ -1,13 +1,18 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponse, Http404
+from django.template import loader
+from .models import Author
 
 
 def index(request):
-    return HttpResponse("Hello, world!")
+    template = loader.get_template('index.html')
+    return render(request, 'index.html', {})
 
 
 def author_page(request, author_id):
-    return HttpResponse(f"The page of the author {author_id}")
+
+    author = get_object_or_404(Author, pk=author_id)
+    return HttpResponse(f"The page of the author {author.nickname}")
 
 
 def fanfic_page(request, fanfic_id):
@@ -23,4 +28,7 @@ def fandom_list(request):
 
 
 def author_list(request):
-    return HttpResponse("List of authors")
+    context = {
+        'authors_list' : Author.objects.order_by('nickname')
+    }
+    return render(request, 'author_page.html', context)

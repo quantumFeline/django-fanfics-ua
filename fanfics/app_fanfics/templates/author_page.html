@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors</title>
+</head>
+<body>
+{% if authors_list %}
+<ul>
+    {% for author in authors_list %}
+    <li><a href="{% url 'fics:author' author.id %}">{{author.nickname}}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p> No authors are registered yet.</p>
+{% endif %}
+</body>
+</html>

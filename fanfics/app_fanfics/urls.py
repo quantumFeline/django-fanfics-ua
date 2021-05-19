@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+app_name = 'fics'
 urlpatterns = [
     path('', views.index, name='index'),
     path('fandoms',   views.fandom_list,     name='fandoms_list'),
