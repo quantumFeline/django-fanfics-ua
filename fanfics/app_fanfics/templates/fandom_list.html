@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fandoms</title>
+</head>
+<body>
+{% if fandoms_list %}
+<ul>
+    {% for author in fandoms_list %}
+    <li><a href="">{{fandom.name}}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p> No fandoms are known yet.</p>
+{% endif %}
+
+
+</body>
+</html>

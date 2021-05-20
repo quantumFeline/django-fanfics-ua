@@ -25,7 +25,7 @@ SECRET_KEY = '&aj^@)kdf*n0-7fitl74()r6lcs%to9jca@yvbop2xaqgmqmcw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '91.228.147.78', 'vpa.nn.kiev.ua', 'fanfics.nn.kiev.ua']
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.0.25', '91.228.147.78', 'vpa.nn.kiev.ua', 'fanfics.nn.kiev.ua']
 
 
 # Application definition
