@@ -2,12 +2,25 @@ import base64
 import json
 import requests
 from django.http import HttpResponseForbidden, HttpResponseRedirect
+from urllib import parse
 
-OAUTH2_GOOGLE_AUTH_URI = "https://accounts.google.com/o/oauth2/auth"
+from django.urls import reverse
+
+OAUTH2_GOOGLE_AUTH_URI = "https://accounts.google.com/o/oauth2/v2/auth"
 OAUTH2_GOOGLE_TOKEN_URI = "https://oauth2.googleapis.com/token"
 OAUTH2_GOOGLE_KEY = r'651900659178-6dh7qogkqicf55rp0ald4jirar0loh4d.apps.googleusercontent.com'
 OAUTH2_GOOGLE_SECRET = r'8VP07bi1J9Iq8Z5ij4MkQm8Q'
-REDIRECT_URI = 'http://fanfics.nn.kiev.ua/oauth2/callback'
+REDIRECT_URI = 'http://fanfics.nn.kiev.ua/fics/oauth2/callback'
+
+GOOGLE_URL = f"{OAUTH2_GOOGLE_AUTH_URI}?response_type=code" \
+           f"&client_id={OAUTH2_GOOGLE_KEY}&redirect_uri={REDIRECT_URI}&scope=email"
+
+# ParseResult(scheme='https',
+#             netloc='accounts.google.com',
+#             path='/o/oauth2/v2/auth',
+#             params='',
+#             query=f'response_type=code&client_id={OAUTH2_GOOGLE_KEY}&redirect_uri={REDIRECT_URI}&scope=email',
+#             fragment='')
 
 
 def oauth_callback(request):
@@ -30,7 +43,7 @@ def oauth_callback(request):
                              'grant_type': 'authorization_code',
                          })
 
-    if resp.status_code == 200:
+    if resp.status_code != 200:
         return HttpResponseForbidden('No tokens from OAuth provider')
 
     decoded = json.loads(resp.content)
@@ -40,4 +53,4 @@ def oauth_callback(request):
 
     request.session['login_type'] = 'google'
     request.session['login'] = jwt_data['email']
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect(reverse('fics:index'))
