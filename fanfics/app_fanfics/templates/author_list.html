@@ -3,11 +3,14 @@
 {% load static %}
 <html lang="en">
 <head>
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script src='{% static 'lib/jquery/dist/jquery.js' %}'></script>
+    <script src="{% static 'scripts/header_footer.js' %}"></script>
     <meta charset="UTF-8">
     <title>Authors</title>
 </head>
 <body>
+<div id="header"></div>
 {% if authors_list %}
 <ul>
     {% for author in authors_list %}
@@ -17,5 +20,6 @@
 {% else %}
 <p> No authors are registered yet.</p>
 {% endif %}
+<div id="footer"></div>
 </body>
 </html>

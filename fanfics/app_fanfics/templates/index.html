@@ -4,29 +4,33 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script src='{% static 'lib/jquery/dist/jquery.js' %}'></script>
+    <script src='{% static 'scripts/header_footer.js' %}'></script>
     <meta charset="UTF-8">
     <title>Welcome!</title>
 </head>
 <body>
+<div id="header"></div>
 {% if logged_in %}
-<p>Welcome! You are logged in as <b>{{ username }}</b>.</p>
-    <ul>
-        <li><a href="{% url 'fics:authors_list' %}">Authors</a> </li>
-        <li><a href="{% url 'fics:fandoms_list' %}">Fandoms</a> </li>
-    </ul>
-<p><a href="{% url 'fics:logout' %}">Logout</a></p>
+    <p>Welcome! You are logged in as <b>{{ username }}</b>.</p>
+        <ul>
+            <li><a href="{% url 'fics:authors_list' %}">Authors</a> </li>
+            <li><a href="{% url 'fics:fandoms_list' %}">Fandoms</a> </li>
+        </ul>
+    <p><a href="{% url 'fics:logout' %}">Logout</a></p>
 {% else %}
-<form action="{% url 'fics:authorize' %}" method="post">
-{% csrf_token %}
-<p><label for="login">Login:</label>
-<input type="text" id="login" name="login"></p>
-<p><label for="password">Password:</label>
-<input type="password" id="password" name="password"></p>
-<p>
-<input type="submit" value="Enter">
-</p>
-</form>
-<p><a href="{{ google_url }}">Authorize</a> via Google</p>
-{% endif %}
+    <form action="{% url 'fics:authorize' %}" method="post">
+    {% csrf_token %}
+    <p><label for="login">Login:</label>
+    <input type="text" id="login" name="login"></p>
+    <p><label for="password">Password:</label>
+    <input type="password" id="password" name="password"></p>
+    <p>
+    <input type="submit" value="Enter">
+    </p>
+    </form>
+    <p><a href="{{ google_url }}">Authorize</a> via Google</p>
+    {% endif %}
+<div id="footer"></div>
 </body>
 </html>

@@ -16,8 +16,9 @@ a:visited {
   color: #382ea6;
 }
 
-footer {
+.footer {
   background-color: #bdbae0;
+  font-size: 8px;
   position: fixed;
   left: 0;
   bottom: 0;
