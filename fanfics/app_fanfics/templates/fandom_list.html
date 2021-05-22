@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,7 +17,5 @@
 {% else %}
 <p> No fandoms are known yet.</p>
 {% endif %}
-
-
 </body>
 </html>

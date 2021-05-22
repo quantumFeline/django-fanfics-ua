@@ -1,0 +1,26 @@
+body {
+  background-color: #eaf0f5;
+  color: #29234a;
+  font: 16px calibri;
+}
+
+a:link {
+  color: #51c1f5;
+}
+
+a:hover {
+  color: #1fa3e0;
+}
+
+a:visited {
+  color: #382ea6;
+}
+
+footer {
+  background-color: #bdbae0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
