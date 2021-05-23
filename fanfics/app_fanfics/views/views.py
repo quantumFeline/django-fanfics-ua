@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -30,3 +31,9 @@ def fandom_list(request):
         'fandoms_list' : Fandom.objects.order_by('name')
     }
     return render(request, 'fandom_list.html', context)
+
+
+def fandom_list_json(request):
+    content = [fandom.name for fandom in list((Fandom.objects.order_by('name')))]
+    body = json.dumps(content) + '\n'
+    return HttpResponse(body, 'application/json')

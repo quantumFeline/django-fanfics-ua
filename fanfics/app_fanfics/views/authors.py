@@ -23,7 +23,6 @@ def author_list(request):
 
 
 def author_list_json(request):
-    print(list(Author.objects.order_by('nickname')))
-    content = {'r': [[1, 'a'], [2, 'b']]}
+    content = [author.nickname for author in list((Author.objects.order_by('nickname')))]
     body = json.dumps(content) + '\n'
     return HttpResponse(body, 'application/json')

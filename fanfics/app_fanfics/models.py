@@ -6,10 +6,13 @@ class Fandom(models.Model):
     name = models.CharField(max_length=200)
     fandom_author = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.name
+
 
 class Author(models.Model):
     nickname = models.CharField(max_length=50)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    # user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     register_date = models.DateField()
     email = models.EmailField()
 
