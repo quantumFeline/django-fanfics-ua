@@ -1,7 +1,7 @@
-from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse, Http404
+from django.shortcuts import render
+from django.http import HttpResponse
 
-from ..oauth import GOOGLE_URL
+from .oauth import GOOGLE_URL
 from ..models import Fandom
 
 
@@ -12,6 +12,7 @@ def index(request):
     context = {
         'logged_in': login is not None,
         'username': f"{login_type}: {login}" if login_type else '',
+        # 'author': Author.objects.filter(autho) if login_type else '',
         'google_url': GOOGLE_URL}
     return render(request, 'index.html', context)
 

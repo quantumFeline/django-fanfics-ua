@@ -16,6 +16,10 @@ a:visited {
   color: #382ea6;
 }
 
+.header {
+  text-decoration: none;
+}
+
 .footer {
   background-color: #bdbae0;
   font-size: 8px;
