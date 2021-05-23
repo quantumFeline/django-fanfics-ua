@@ -10,6 +10,7 @@ urlpatterns = [
     path('oauth2/callback', oauth.oauth_callback),
 
     path('fandoms',   views.fandom_list,     name='fandoms_list'),
+    path('api/author/index', authors.author_list_json),
     path('authors',   authors.author_list,     name='authors_list'),
     path('author/<int:author_id>',   authors.author_page,     name='author_page'),
     path('fanfic/<int:fanfic_id>',   views.fanfic_page,     name='fanfic_page'),

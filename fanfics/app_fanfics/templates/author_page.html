@@ -1,10 +1,26 @@
 <!DOCTYPE html>
+
+{% load static %}
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script src='{% static 'lib/jquery/dist/jquery.js' %}'></script>
+    <script src="{% static 'scripts/header_footer.js' %}"></script>
+    <title>Fandoms</title>
 </head>
 <body>
-$END$
+<div id="header"></div>
+<div><p> Profile of {{ author.nickname }}</p></div>
+{% if fanfics_list %}
+<ul>
+    {% for fic in fandoms_list %}
+    <li><a href="{% url 'fics:fanfic_page' fanfic.id %}">{{fic.title}}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p> The author doesn't have any works published yet.</p>
+{% endif %}
+<div id="footer"></div>
 </body>
 </html>
