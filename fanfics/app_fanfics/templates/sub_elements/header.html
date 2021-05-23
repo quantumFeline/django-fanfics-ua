@@ -1,3 +1,5 @@
+{% load static %}
+<link rel="shortcut icon" type="image/png" href="{% static "favicon.ico" %}"/>
 <div id="header">
     <a href="{% url 'fics:index' %}" style="text-decoration: none"><h1>Фанфікшн українською</h1></a>
     {% if logged_in %}
@@ -18,3 +20,4 @@
         <p><a href="{{ google_url }}">Authorize</a> via Google</p>
     {% endif %}
 </div>
+
