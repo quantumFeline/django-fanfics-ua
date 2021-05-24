@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '192.168.0.25', '91.228.147.78', 'vpa.nn.kiev.ua', 'fanfics.nn.kiev.ua']
 
+AUTH_USER_MODEL = 'app_fanfics.User'
 
 # Application definition
 

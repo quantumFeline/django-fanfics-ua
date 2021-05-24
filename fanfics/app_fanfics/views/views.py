@@ -7,12 +7,11 @@ from ..models import Fandom
 
 
 def index(request):
-    login = request.session.get('login')
-    login_type = request.session.get('login_type')
+    print(dir(request.user))
 
     context = {
-        'logged_in': login is not None,
-        'username': f"{login_type}: {login}" if login_type else '',
+        'logged_in': request.user.is_authenticated,
+        'username': request.user.username,
         # 'author': Author.objects.filter(autho) if login_type else '',
         'google_url': GOOGLE_URL}
     return render(request, 'index.html', context)

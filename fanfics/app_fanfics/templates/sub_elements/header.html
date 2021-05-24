@@ -2,11 +2,15 @@
 <link rel="shortcut icon" type="image/png" href="{% static "favicon.ico" %}"/>
 <div id="header">
     <a href="{% url 'fics:index' %}" style="text-decoration: none"><h1>Фанфікшн українською</h1></a>
+
     {% if logged_in %}
+
         <p>Welcome! You are logged in as <b>{{ username }}</b>.</p>
         <p><a href="">Your profile</a></p>
         <p><a href="{% url 'fics:logout' %}">Logout</a></p>
+
     {% else %}
+
         <form action="{% url 'fics:authorize' %}" method="post">
         {% csrf_token %}
         <p><label for="login">Login:</label>
@@ -18,6 +22,7 @@
         </p>
         </form>
         <p><a href="{{ google_url }}">Authorize</a> via Google</p>
+
     {% endif %}
 </div>
 

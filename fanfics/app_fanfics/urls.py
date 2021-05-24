@@ -5,9 +5,9 @@ app_name = 'fics'
 urlpatterns = [
     path('', views.index, name='index'),
 
-    path('register', logins.register, name='register'),
-    path('authorize', logins.authorize, name='authorize'),
-    path('logout', logins.logout, name='logout'),
+    path('register', logins.register_view, name='register'),
+    path('authorize', logins.authorize_view, name='authorize'),
+    path('logout', logins.logout_view, name='logout'),
     path('oauth2/callback', oauth.oauth_callback),
 
     path('api/author/index', authors.author_list_json),
