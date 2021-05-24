@@ -6,11 +6,11 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <script src='{% static 'lib/jquery/dist/jquery.js' %}'></script>
-    <title>Fandoms</title>
+    <title>{{ author.nickname }} - Фанфікшн українською</title>
 </head>
 <body>
 {% include "sub_elements/header.html" %}
-<div><p> Profile of {{ author.nickname }}</p></div>
+<div><p> Профіль автора {{ author.nickname }}</p></div>
 {% if fanfics_list %}
 <ul>
     {% for fic in fandoms_list %}

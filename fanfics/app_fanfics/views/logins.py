@@ -1,7 +1,15 @@
-from django.contrib.auth.models import User
+import datetime
+
+from django.shortcuts import render
+
+from ..models import User, Author
 from django.contrib.auth import authenticate, login, logout
 from django.http import (HttpResponse, HttpResponseForbidden, HttpResponseRedirect)
 from django.urls import reverse
+
+
+def registration_page(request):
+    return render(request, 'register.html', {})
 
 
 def register_view(request):
@@ -12,6 +20,8 @@ def register_view(request):
     password = request.POST.get('password')
     new_user = User.objects.create_user(username, email, password)
     new_user.save()
+    new_author = Author(nickname=username, user=new_user, register_date=datetime.date.today())
+    new_author.save()
     return HttpResponseRedirect(reverse('fics:index'))
 
 

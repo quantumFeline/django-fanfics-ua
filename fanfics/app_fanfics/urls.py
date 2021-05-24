@@ -4,6 +4,7 @@ from .views import views, logins, oauth, authors, user_page
 app_name = 'fics'
 urlpatterns = [
     path('', views.index, name='index'),
+    path('registration_page', logins.registration_page, name='registration_page'),
 
     path('register', logins.register_view, name='register'),
     path('authorize', logins.authorize_view, name='authorize'),

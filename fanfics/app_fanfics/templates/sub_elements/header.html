@@ -13,15 +13,14 @@
 
         <form action="{% url 'fics:authorize' %}" method="post">
         {% csrf_token %}
-        <p><label for="login">Login:</label>
-        <input type="text" id="login" name="login"></p>
-        <p><label for="password">Password:</label>
-        <input type="password" id="password" name="password"></p>
-        <p>
+        <label for="login">Login:</label>
+        <input type="text" id="login" name="login">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
         <input type="submit" value="Enter">
-        </p>
         </form>
         <p><a href="{{ google_url }}">Authorize</a> via Google</p>
+        <p><a href="{% url 'fics:registration_page' %}">Create an account</a></p>
 
     {% endif %}
 </div>

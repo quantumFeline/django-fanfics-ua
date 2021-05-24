@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script src='{% static 'lib/jquery/dist/jquery.js' %}'></script>
+    <title>Реєстрація</title>
+</head>
+<!-- No full header, just part of it. -->
+<link rel="shortcut icon" type="image/png" href="{% static "favicon.ico" %}"/>
+<div id="header"><a href="{% url 'fics:index' %}" style="text-decoration: none"><h1>Фанфікшн українською</h1></a></div>
+<div><p> Створити нового користувача</p></div>
+    <form action="{% url 'fics:register' %}" method="post">
+        {% csrf_token %}
+        <p><label for="login">Login:</label><input type="text" id="login" name="login"></p>
+        <p><label for="email">E-mail address:</label><input type="email" id="email" name="email"></p>
+        <p><label for="password">Password:</label><input type="password" id="password" name="password"></p>
+        <p><input type="submit" value="Enter"></p>
+    </form>
+{% include "sub_elements/footer.html" %}
+</body>
+</html>
