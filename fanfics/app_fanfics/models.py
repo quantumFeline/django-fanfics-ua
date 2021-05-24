@@ -16,7 +16,7 @@ class Fandom(models.Model):
 
 class Author(models.Model):
     nickname = models.CharField(max_length=50)
-    # user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
     register_date = models.DateField()
     email = models.EmailField()
 

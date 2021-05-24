@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 
+from .login_context import get_login_context
+
 
 def add_fanfic_page(request):
-    return render(request, "add_fanfic.html", {})
+    return render(request, "add_fanfic.html", get_login_context(request))
 
 
 def publish(request):
