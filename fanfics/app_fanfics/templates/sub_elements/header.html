@@ -6,7 +6,7 @@
     {% if logged_in %}
 
         <p>Welcome! You are logged in as <b>{{ username }}</b>.</p>
-        <p><a href="">Your profile</a></p>
+        <p><a href="{%  url 'fics:author_page' author_id %}">Your profile</a></p>
         <p><a href="{% url 'fics:logout' %}">Logout</a></p>
 
     {% else %}
