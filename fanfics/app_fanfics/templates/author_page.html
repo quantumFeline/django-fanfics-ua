@@ -11,6 +11,9 @@
 <body>
 {% include "sub_elements/header.html" %}
 <div><p> Профіль автора {{ author.nickname }}</p></div>
+{%  if is_owner %}
+    <p><a href="{% url 'fics:add_fanfic' %}">Publish a fanfic</a></p>
+{% endif %}
 {% if fanfics_list %}
 <ul>
     {% for fic in fandoms_list %}

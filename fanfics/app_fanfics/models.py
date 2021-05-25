@@ -38,4 +38,4 @@ class Fanfic(models.Model):
 
 class Chapter(models.Model):
     fanfic = models.ForeignKey(Fanfic, on_delete=models.CASCADE)
-    text = models.TextField()
+    text = models.FileField()
