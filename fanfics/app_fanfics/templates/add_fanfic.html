@@ -34,10 +34,11 @@
 </head>
 <body>
 {% include "sub_elements/header.html" %}
-<div><p> Post a new fanfic</p></div>
-<input type="text" id="title" placeholder="Title"><br/><br/>
-<input id="fandom" placeholder="Fandom"><br/><br/>
-<input type="file" id="text" placeholder="text"><br/><br/>
+<div><p>Створити новий фанфік</p></div>
+<label for="title">Назва фанфіку</label><input type="text" id="title" placeholder="Title"><br/><br/>
+<label for="fandom">Фандом</label><input id="fandom" placeholder="Fandom"><br/><br/>
+<label for="annotation">Аннотація</label><textarea id="annotation" name="annotation" cols="100" rows="10"></textarea>
+<p style="color: #6b90b2">Ви зможете додавати нові глави після створення фанфіку.</p>
 <input type="submit" id="submit-fic">
 {% include "sub_elements/footer.html" %}
 </body>

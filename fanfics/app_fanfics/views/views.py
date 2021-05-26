@@ -10,7 +10,13 @@ def index(request):
 
 
 def fanfic_page(request, fanfic_id):
-    return HttpResponse(f"The page of the fanfic {fanfic_id} by {fanfic_id}")
+    fanfic = get_object_or404(Fanfic, pk=fanfic_id)
+    context = {
+        'fanfic': fanfic,
+        'chapter_list': Chapter.objects.filter(fanfic=fanfic_id).order_by('title')
+    }
+    context.update(get_login_context(request))
+    return render(request, 'fanfic.html', context)
 
 
 def chapter_reading(request, chapter_id):

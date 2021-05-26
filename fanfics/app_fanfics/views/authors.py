@@ -9,10 +9,11 @@ from ..models import Author, Fanfic
 
 def author_page(request, author_id):
     author = get_object_or_404(Author, pk=author_id)
-    context = get_login_context(request, {
+    context = {
         'author': author,
         'fanfic_list': Fanfic.objects.filter(author = author_id).order_by('title')
-    })
+    }
+    context.update(get_login_context(request))
     context.update({
         'is_owner': author.nickname == context['username']
     })

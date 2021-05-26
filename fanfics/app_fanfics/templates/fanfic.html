@@ -7,16 +7,51 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <script src='{% static 'lib/jquery/dist/jquery.js' %}'></script>
     <title>{{ fanfic.title }} - Фанфікшн українською</title>
+
+    <script>
+        // Changing input type on the fly
+        const InputTypes = Object.freeze({"file": 1, "text": 2});
+        const ButtonTexts = Object.freeze({1: "або введіть текст", 2: "або завантажте текстовий файл"});
+        let currentInputType = InputTypes["file"];
+        $("chapter_text").hide(); // set initial configuration of what is visible
+
+        $("change_input_type")
+            .textContent = ButtonTexts[currentInputType] // set initial text
+            .click(function () {
+                if (currentInputType === InputTypes["file"]) {
+                    $("chapter_file").hide();
+                    $("chapter_text").show();
+                    currentInputType = InputTypes["text"];
+                } else if (currentInputType === InputTypes["text"]) {
+                    $("chapter_file").show();
+                    $("chapter_text").hide();
+                    currentInputType = InputTypes["file"];
+                } else {
+                    console.log("Unknown input type; cannot change");
+                }
+        })
+    </script>
+
+
+    <script>
+        // Changing text area size according to how much text is present in it
+    </script>
+
 </head>
 <body>
 {% include "sub_elements/header.html" %}
-<div><p> Профіль автора {{ author.nickname }}</p></div>
+<div><p> {{ fanfic.title }}</p></div>
 {%  if is_owner %}
-    <p><a href="{% url 'fics:add_fanfic' %}">Publish a fanfic</a></p>
+    <div><p>Опублікувати нову главу</p></div>
+    <label for="title">Назва глави</label><input type="text" id="title" placeholder="Title"><br/><br/>
+    <input type="file" id="chapter_file" placeholder="chapter_file"><br/><br/>
+    <label for="chapter_text"></label><textarea id="chapter_text" name="chapter_text" cols="200" rows="100"></textarea>
+    <input type="button" id="change_input_type">
+    <input type="submit" id="submit-fic">
 {% endif %}
 {% if fanfics_list %}
 <ul>
-    {% for fic in fandoms_list %}
+    {% for chapter in chapter_list %}
     <li><a href="{% url 'fics:fanfic_page' fanfic.id %}">{{fic.title}}</a></li>
     {% endfor %}
 </ul>
