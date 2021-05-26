@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -26,9 +28,9 @@ class Author(models.Model):
 class Fanfic(models.Model):
     title = models.CharField(max_length=500)
     annotation = models.TextField()
-    publication_date = models.DateTimeField('Published:')
+    publication_date = models.DateTimeField('Published:', default=datetime.date.today())
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True)
-    # FIXME
+    # TODO
     # beta = models.ForeignKey(Author, on_delete=models.SET_NULL)
     fandom = models.ForeignKey(Fandom, on_delete=models.SET_DEFAULT, default=1)
 
@@ -38,4 +40,7 @@ class Fanfic(models.Model):
 
 class Chapter(models.Model):
     fanfic = models.ForeignKey(Fanfic, on_delete=models.CASCADE)
+    chapter_number = models.IntegerField(default=1)
+    chapter_title = models.CharField(max_length=500, default="Глава " + str(chapter_number))
+    publication_date = models.DateTimeField('Published:', default=datetime.date.today())
     text = models.FileField()
