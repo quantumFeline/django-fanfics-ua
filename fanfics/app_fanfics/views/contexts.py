@@ -1,5 +1,6 @@
 from .oauth import GOOGLE_URL
-from ..models import Author
+from ..models import Author, Fanfic, Chapter
+from django.shortcuts import get_object_or_404
 
 
 def get_login_context(request, base_context: dict = None):
@@ -28,3 +29,11 @@ def get_login_context(request, base_context: dict = None):
         return context
 
     return auth_context
+
+
+def get_fanfic_context(fanfic_id):
+    fanfic = get_object_or_404(Fanfic, pk=fanfic_id)
+    return {
+        'fanfic': fanfic,
+        'chapter_list': Chapter.objects.filter(fanfic=fanfic_id).order_by('chapter_title')
+    }

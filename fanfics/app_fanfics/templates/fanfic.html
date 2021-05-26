@@ -13,24 +13,30 @@
         $(document).ready(function() {
             const InputTypes = Object.freeze({"file": 1, "text": 2});
             const ButtonTexts = Object.freeze({1: "або введіть текст", 2: "або завантажте текстовий файл"});
-            let currentInputType = InputTypes["file"];
+            let currentInputType;
+
+            function setInputType(currentName) {
+                currentInputType = InputTypes[currentName];
+                $("#change_input_type").val(ButtonTexts[currentInputType]); // set initial text
+                $("#input_type").val(currentName);
+            }
+
+            setInputType("file");
             $("#chapter_text").hide(); // set initial configuration of what is visible
 
-            $("#change_input_type").val(ButtonTexts[currentInputType]); // set initial text
             $("#change_input_type").click(function () {
-                    if (currentInputType === InputTypes["file"]) {
-                        $("#chapter_file").hide();
-                        $("#chapter_text").show();
-                        currentInputType = InputTypes["text"];
-                    } else if (currentInputType === InputTypes["text"]) {
-                        $("#chapter_file").show();
-                        $("#chapter_text").hide();
-                        currentInputType = InputTypes["file"];
-                    } else {
-                        console.log("Unknown input type; cannot change");
-                    }
-                    $("#change_input_type").val(ButtonTexts[currentInputType]);
-                });
+                if (currentInputType === InputTypes["file"]) {
+                    $("#chapter_file").hide();
+                    $("#chapter_text").show();
+                    setInputType("text");
+                } else if (currentInputType === InputTypes["text"]) {
+                    $("#chapter_file").show();
+                    $("#chapter_text").hide();
+                    setInputType("file");
+                } else {
+                    console.log("Unknown input type; cannot change");
+                }
+            });
         });
     </script>
 
@@ -45,14 +51,24 @@
 <div><h3> {{ fanfic.title }}</h3></div>
 {%  if is_owner %}
     <div><p style="font-weight: bold">Опублікувати нову главу</p></div>
-    <form action="{% url 'fics:publish_chapter' %}" method="post">
-    {% csrf_token %}
-    <label for="title">Назва глави</label>  <input type="text" id="title" placeholder="Title"><br/><br/>
-    <input type="file" id="chapter_file" placeholder="chapter_file">
-    <label for="chapter_text"></label>
+    <form action="{% url 'fics:publish_chapter' fanfic.id %}" method="post">
+
+        {% csrf_token %}
+
+        <label for="title">Назва глави</label>
+        <input type="text" id="title" placeholder="Title" name="title"><br/><br/>
+
+        <label for="chapter_file"></label>
+        <input type="file" id="chapter_file" placeholder="chapter_file">
+
+        <label for="chapter_text"></label>
         <textarea id="chapter_text" name="chapter_text" cols="100" rows="20"></textarea><br/><br/>
-    <input type="button" id="change_input_type"><br/><br/>
-    <input type="submit" id="submit-fic">
+
+        <input type="button" id="change_input_type"><br/><br/>
+
+        <input type="hidden" id="input_type" name="input_type" value="hmm">
+
+        <input type="submit" id="submit-fic">
     </form>
 {% endif %}
 {% if chapter_list %}

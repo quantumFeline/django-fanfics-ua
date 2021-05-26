@@ -6,7 +6,7 @@ from ..models import User, Author
 from django.contrib.auth import authenticate, login, logout
 from django.http import (HttpResponse, HttpResponseForbidden, HttpResponseRedirect)
 from django.urls import reverse
-from .login_context import get_login_context
+from .contexts import get_login_context
 
 
 def registration_page(request):
