@@ -16,6 +16,9 @@ def fanfic_page(request, fanfic_id):
         'chapter_list': Chapter.objects.filter(fanfic=fanfic_id).order_by('chapter_title')
     }
     context.update(get_login_context(request))
+    context.update({
+        'is_owner': fanfic.author.nickname == context['username']
+    })
     return render(request, 'fanfic.html', context)
 
 

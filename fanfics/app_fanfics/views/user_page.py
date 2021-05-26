@@ -36,3 +36,7 @@ def publish(request):
                     publication_date=datetime.date.today())
     fanfic.save()
     return HttpResponseRedirect(reverse('fics:fanfic_page', args=[fanfic.id]))
+
+
+def publish_chapter(request):
+    pass

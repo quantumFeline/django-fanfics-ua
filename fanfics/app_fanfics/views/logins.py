@@ -6,6 +6,7 @@ from ..models import User, Author
 from django.contrib.auth import authenticate, login, logout
 from django.http import (HttpResponse, HttpResponseForbidden, HttpResponseRedirect)
 from django.urls import reverse
+from .login_context import get_login_context
 
 
 def registration_page(request):
@@ -22,7 +23,8 @@ def register_view(request):
     new_user.save()
     new_author = Author(nickname=username, user=new_user, register_date=datetime.date.today())
     new_author.save()
-    return HttpResponseRedirect('')
+    author_id = get_login_context(request).get('author_id')
+    return HttpResponseRedirect(reverse('fics:author_page', args=[author_id]))
 
 
 def authorize_view(request):
@@ -37,7 +39,8 @@ def authorize_view(request):
     if user is None:
         return HttpResponse("No such user registered.")
     login(request, user)
-    return HttpResponseRedirect('')
+    author_id = get_login_context(request).get('author_id')
+    return HttpResponseRedirect(reverse('fics:author_page', args=[author_id]))
 
 
 def logout_view(request):

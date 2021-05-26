@@ -16,6 +16,7 @@ urlpatterns = [
 
     path('add_fanfic', user_page.add_fanfic_page, name='add_fanfic'),
     path('publish', user_page.publish, name='publish'),
+    path('publish_chapter', user_page.publish_chapter, name='publish_chapter'),
 
     path('fandoms', views.fandom_list, name='fandoms_list'),
     path('authors', authors.author_list, name='authors_list'),
