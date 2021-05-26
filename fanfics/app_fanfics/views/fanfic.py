@@ -5,9 +5,11 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.core.files.base import ContentFile, File
 import django.utils.timezone
+from django.core.files.storage import default_storage
 
 from .contexts import get_login_context, get_fanfic_context
 from ..models import Fanfic, Fandom, Author, Chapter
+from django import template
 
 FILE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "files")
 
@@ -16,12 +18,24 @@ def add_fanfic_page(request):
     return render(request, "add_fanfic.html", get_login_context(request))
 
 
+class DisplayChapter:
+    def __init__(self, chapter, text):
+        self.chapter = chapter
+        self.text = "123" #text
+
+
 def fanfic_page(request, fanfic_id):
     context = get_fanfic_context(fanfic_id)
     context.update(get_login_context(request))
     context.update({
         'is_owner': context.get('fanfic').author.nickname == context['username']
     })
+    chapter_list = []
+    for chapter in context.get('chapter_list'):
+        # lines = default_storage.open(chapter.text.path).read()
+        chapter_list.append(DisplayChapter(chapter, 'lines'))
+
+    context['display_chapter_list'] = chapter_list
     return render(request, 'fanfic.html', context)
 
 

@@ -73,7 +73,9 @@
 {% endif %}
 {% if chapter_list %}
 <ul>
-    {% for chapter in chapter_list %}
+    {% for chapter in display_chapter_list %}
+        <h2>{{ chapter.chapter.chapter_number }}. {{ chapter.chapter.chapter_title }}</h2>
+        <p>{{ chapter.text }}</p>
     {%  comment %}<li><a href="{% url 'fics:fanfic_page' fanfic.id %}">{{fic.title}}</a></li>{% endcomment %}
     {% endfor %}
 </ul>

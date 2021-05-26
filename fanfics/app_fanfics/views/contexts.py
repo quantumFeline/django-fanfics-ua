@@ -35,5 +35,5 @@ def get_fanfic_context(fanfic_id):
     fanfic = get_object_or_404(Fanfic, pk=fanfic_id)
     return {
         'fanfic': fanfic,
-        'chapter_list': Chapter.objects.filter(fanfic=fanfic_id).order_by('chapter_title')
+        'chapter_list': Chapter.objects.filter(fanfic=fanfic_id).order_by('chapter_number')
     }

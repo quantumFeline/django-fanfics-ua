@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 import django.utils.timezone
+from django.core.files.storage import default_storage
 
 
 class User(AbstractUser):
@@ -44,4 +45,4 @@ class Chapter(models.Model):
     chapter_number = models.IntegerField(default=1)
     chapter_title = models.CharField(max_length=500, default="Глава " + str(chapter_number))
     publication_date = models.DateTimeField('Published:', default=django.utils.timezone.now)
-    text = models.FileField()
+    text = models.FileField(storage=default_storage)
