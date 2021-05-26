@@ -1,8 +1,8 @@
 import json
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .login_context import get_login_context
-from ..models import Fandom
+from ..models import Fandom, Fanfic, Chapter
 
 
 def index(request):
@@ -10,10 +10,10 @@ def index(request):
 
 
 def fanfic_page(request, fanfic_id):
-    fanfic = get_object_or404(Fanfic, pk=fanfic_id)
+    fanfic = get_object_or_404(Fanfic, pk=fanfic_id)
     context = {
         'fanfic': fanfic,
-        'chapter_list': Chapter.objects.filter(fanfic=fanfic_id).order_by('title')
+        'chapter_list': Chapter.objects.filter(fanfic=fanfic_id).order_by('chapter_title')
     }
     context.update(get_login_context(request))
     return render(request, 'fanfic.html', context)
@@ -25,7 +25,7 @@ def chapter_reading(request, chapter_id):
 
 def fandom_list(request):
     context = {
-        'fandoms_list' : Fandom.objects.order_by('name')
+        'fandoms_list': Fandom.objects.order_by('name')
     }
     context.update(get_login_context(request))
     return render(request, 'fandom_list.html', context)

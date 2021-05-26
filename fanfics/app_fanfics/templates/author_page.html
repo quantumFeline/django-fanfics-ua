@@ -14,10 +14,10 @@
 {%  if is_owner %}
     <p><a href="{% url 'fics:add_fanfic' %}">Publish a fanfic</a></p>
 {% endif %}
-{% if fanfics_list %}
+{% if fanfic_list %}
 <ul>
-    {% for fic in fandoms_list %}
-    <li><a href="{% url 'fics:fanfic_page' fanfic.id %}">{{fic.title}}</a></li>
+    {% for fic in fanfic_list %}
+    <li><a href="{% url 'fics:fanfic_page' fic.id %}">{{fic.title}}</a></li>
     {% endfor %}
 </ul>
 {% else %}

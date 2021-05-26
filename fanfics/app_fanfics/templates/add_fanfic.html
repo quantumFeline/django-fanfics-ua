@@ -35,11 +35,17 @@
 <body>
 {% include "sub_elements/header.html" %}
 <div><p>Створити новий фанфік</p></div>
-<label for="title">Назва фанфіку</label><input type="text" id="title" placeholder="Title"><br/><br/>
-<label for="fandom">Фандом</label><input id="fandom" placeholder="Fandom"><br/><br/>
-<label for="annotation">Аннотація</label><textarea id="annotation" name="annotation" cols="100" rows="10"></textarea>
-<p style="color: #6b90b2">Ви зможете додавати нові глави після створення фанфіку.</p>
-<input type="submit" id="submit-fic">
+<form action="{% url 'fics:publish' %}" method="post">
+    {% csrf_token %}
+    <label for="fanfic_title">Назва фанфіку</label>
+    <input type="text" id="fanfic_title" placeholder="Title" name="title"><br/><br/>
+    <label for="fandom">Фандом</label>
+    <input type="text" id="fandom" placeholder="Fandom" name="fandom"><br/><br/>
+    <label for="annotation">Аннотація</label>
+    <textarea id="annotation" name="annotation" cols="100" rows="10" placeholder="Аннотація до фанфіку..."></textarea>
+    <p style="color: #6b90b2; font-style: italic">Ви зможете додавати нові глави після створення фанфіку.</p>
+    <input type="submit" id="submit-fic" value="Створити фанфік">
+</form>
 {% include "sub_elements/footer.html" %}
 </body>
 </html>

@@ -43,20 +43,22 @@
 <div><p> {{ fanfic.title }}</p></div>
 {%  if is_owner %}
     <div><p>Опублікувати нову главу</p></div>
+    <form action="{% url 'fics:add_chapter' %}" method="post">
     <label for="title">Назва глави</label><input type="text" id="title" placeholder="Title"><br/><br/>
     <input type="file" id="chapter_file" placeholder="chapter_file"><br/><br/>
     <label for="chapter_text"></label><textarea id="chapter_text" name="chapter_text" cols="200" rows="100"></textarea>
     <input type="button" id="change_input_type">
     <input type="submit" id="submit-fic">
+    </form>
 {% endif %}
-{% if fanfics_list %}
+{% if chapter_list %}
 <ul>
     {% for chapter in chapter_list %}
-    <li><a href="{% url 'fics:fanfic_page' fanfic.id %}">{{fic.title}}</a></li>
+    {%  comment %}<li><a href="{% url 'fics:fanfic_page' fanfic.id %}">{{fic.title}}</a></li>{% endcomment %}
     {% endfor %}
 </ul>
 {% else %}
-<p> The author doesn't have any works published yet.</p>
+<p> В цьому фанфіку поки що немає опублікованих глав. </p>
 {% endif %}
 {% include "sub_elements/footer.html" %}
 </body>

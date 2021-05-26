@@ -22,7 +22,7 @@ def register_view(request):
     new_user.save()
     new_author = Author(nickname=username, user=new_user, register_date=datetime.date.today())
     new_author.save()
-    return HttpResponseRedirect(reverse('fics:index'))
+    return HttpResponseRedirect('')
 
 
 def authorize_view(request):
@@ -37,7 +37,7 @@ def authorize_view(request):
     if user is None:
         return HttpResponse("No such user registered.")
     login(request, user)
-    return HttpResponseRedirect(reverse('fics:index'))
+    return HttpResponseRedirect('')
 
 
 def logout_view(request):

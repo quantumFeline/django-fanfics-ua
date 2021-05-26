@@ -9,7 +9,8 @@ def get_login_context(request, base_context: dict = None):
     if logged_in:
         username = request.user.username
         author_ids = Author.objects.filter(nickname=username)
-        author_id = author_ids[0].id if author_ids is not None else None
+        print("AUTHOR IDS:", author_ids)
+        author_id = author_ids[0].id if author_ids else None
 
     else:
         username = None
@@ -20,8 +21,10 @@ def get_login_context(request, base_context: dict = None):
         'username': username,
         'author_id': author_id,
         'google_url': GOOGLE_URL}
+
     if base_context:
         context = base_context
         base_context.update(auth_context)
         return context
+
     return auth_context

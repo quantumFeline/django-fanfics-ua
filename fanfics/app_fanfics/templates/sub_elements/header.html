@@ -6,7 +6,10 @@
     {% if logged_in %}
 
         <p>Welcome! You are logged in as <b>{{ username }}</b>.</p>
-        <p><a href="{%  url 'fics:author_page' author_id %}">Your profile</a></p>
+        {% if author_id %}
+            <!-- It is possible to be logged in but to be not an author - e.g., you're logged as an admin. -->
+            <p><a href="{%  url 'fics:author_page' author_id %}">Your profile</a></p>
+        {%  endif %}
         <p><a href="{% url 'fics:logout' %}">Logout</a></p>
 
     {% else %}
